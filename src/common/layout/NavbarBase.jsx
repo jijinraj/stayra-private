@@ -145,9 +145,9 @@ export default function NavbarBase({
                   Log in
                 </NavLink>
                 {/* Wrap Button with SmartLink so we keep SPA navigation */}
-                <SmartLink href={cta.href} className="inline-block">
-                  <Button className="rounded-md">{cta.label}</Button>
-                </SmartLink>
+ <Button to={cta.href} className="rounded-md">
+   {cta.label}
+ </Button>
               </>
             )}
           </div>
@@ -225,9 +225,9 @@ export default function NavbarBase({
                 <NavLink href="/login" onClick={() => { setOpen(false); onLogin?.(); }}>
                   Log in
                 </NavLink>
-                <SmartLink href={cta.href} className="block mt-2" onClick={() => setOpen(false)}>
-                  <Button className="w-full">{cta.label}</Button>
-                </SmartLink>
+ <Button to={cta.href} className="rounded-md">
+   {cta.label}
+ </Button>
               </>
             )}
           </div>
