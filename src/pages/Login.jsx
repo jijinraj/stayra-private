@@ -1,6 +1,7 @@
 import React from "react";
 import { Section } from "@/design-system/layout";
 import { Button } from "@/design-system/button";
+import SEO from "@/common/seo/SEO";
 
 export default function Login() {
   return (
