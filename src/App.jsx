@@ -1,8 +1,11 @@
+import React from "react";
+
 export default function App() {
   return (
-    <div style={{ padding: 24 }}>
-      <h1>Stayra App</h1>
-      <p>Initial setup is working ✅</p>
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      <h1 className="text-3xl font-bold text-indigo-600">
+        Stayra + Tailwind setup ✅
+      </h1>
     </div>
   );
 }
