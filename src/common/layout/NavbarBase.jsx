@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/design-system/button";
 import { Container } from "@/design-system/layout";
 
@@ -7,21 +8,22 @@ export default function NavbarBase({
   className,
   logo = { label: "Stayra", href: "/" },
   links = [
-    { label: "Product", href: "#product" },
-    { label: "Marketplace", href: "#marketplace" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Docs", href: "#docs" },
+    { label: "Product", href: "/#product" },   // note: hash on Home
+    { label: "Marketplace", href: "/marketplace" },
+    { label: "Pricing", href: "/#pricing" },   // hash on Home
+    { label: "Docs", href: "/docs" },
   ],
   isAuthed = false,
   user = null,
   onLogin,
   onLogout,
-  cta = { label: "Get started", href: "#get-started" },
+  cta = { label: "Get started", href: "/login" },
 }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // Scroll → strengthen elevation
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 2);
     onScroll();
@@ -33,13 +35,58 @@ export default function NavbarBase({
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
 
-  const NavLink = ({ href, children }) => (
-    <a
+  // SmartLink: uses <Link> for routes, smooth-scroll for hashes
+  function SmartLink({ href, className, children, onClick }) {
+    const isHash = href?.includes("#");
+    if (isHash) {
+      return (
+        <a
+          href={href}
+          className={className}
+          onClick={(e) => {
+            e.preventDefault();
+            const [path, hash] = href.split("#");
+            // If a different path, navigate there first, then scroll
+            if (path && path !== "" && path !== location.pathname) {
+              navigate(path, { replace: false });
+              // Wait a tick for route paint
+              setTimeout(() => {
+                const el = document.getElementById(hash);
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }, 0);
+            } else {
+              const el = document.getElementById(hash);
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              // Update URL hash without reload
+              window.history.replaceState({}, "", `#${hash}`);
+            }
+            onClick?.(e);
+          }}
+        >
+          {children}
+        </a>
+      );
+    }
+    return (
+      <Link to={href} className={className} onClick={onClick}>
+        {children}
+      </Link>
+    );
+  }
+
+  const baseLink =
+    "px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100/70 transition rounded-md";
+  const isActive = (href) =>
+    !href.includes("#") && href === location.pathname;
+
+  const NavLink = ({ href, children, onClick }) => (
+    <SmartLink
       href={href}
-      className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100/70 transition rounded-md"
+      onClick={onClick}
+      className={clsx(baseLink, isActive(href) && "text-gray-900 font-medium")}
     >
       {children}
-    </a>
+    </SmartLink>
   );
 
   return (
@@ -51,15 +98,12 @@ export default function NavbarBase({
         Skip to content
       </a>
 
-      {/* Full-width, glassy bar; no radius */}
+      {/* Full-width, glassy bar; tiny hairline by default, stronger shadow on scroll */}
       <header
         data-scrolled={scrolled}
         className={clsx(
-          // full-bleed background
           "fixed top-0 inset-x-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60",
-          // baseline hairline shadow (always on)
           "shadow-[0_1px_0_0_rgba(0,0,0,0.04)]",
-          // strengthen shadow when scrolled
           "data-[scrolled=true]:shadow-sm",
           className
         )}
@@ -67,13 +111,13 @@ export default function NavbarBase({
       >
         <Container className="h-16 flex items-center justify-between">
           {/* Brand */}
-          <a
-            href={logo.href}
+          <Link
+            to={logo.href}
             className="text-sm font-semibold tracking-tight text-gray-900"
             aria-label="Stayra Home"
           >
             {logo.label}
-          </a>
+          </Link>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
@@ -97,16 +141,13 @@ export default function NavbarBase({
               </>
             ) : (
               <>
-                <a
-                  href="#login"
-                  onClick={onLogin}
-                  className="px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100/70 transition rounded-md"
-                >
+                <NavLink href="/login" onClick={onLogin}>
                   Log in
-                </a>
-                <Button href={cta.href} className="rounded-md">
-                  {cta.label}
-                </Button>
+                </NavLink>
+                {/* Wrap Button with SmartLink so we keep SPA navigation */}
+                <SmartLink href={cta.href} className="inline-block">
+                  <Button className="rounded-md">{cta.label}</Button>
+                </SmartLink>
               </>
             )}
           </div>
@@ -143,9 +184,9 @@ export default function NavbarBase({
           aria-label="Mobile menu"
         >
           <div className="flex items-center justify-between h-16 px-4 border-b border-gray-100">
-            <a href={logo.href} className="font-semibold">
+            <Link to={logo.href} className="font-semibold" onClick={() => setOpen(false)}>
               {logo.label}
-            </a>
+            </Link>
             <button
               className="p-2 rounded-md border border-gray-200 bg-white"
               onClick={() => setOpen(false)}
@@ -158,14 +199,13 @@ export default function NavbarBase({
           </div>
           <nav className="p-4 grid gap-1">
             {links.map((l) => (
-              <a
+              <NavLink
                 key={l.href}
                 href={l.href}
-                className="px-3 py-2 rounded-md text-gray-800 hover:bg-gray-50"
                 onClick={() => setOpen(false)}
               >
                 {l.label}
-              </a>
+              </NavLink>
             ))}
           </nav>
           <div className="p-4 mt-auto">
@@ -182,19 +222,12 @@ export default function NavbarBase({
               </Button>
             ) : (
               <>
-                <a
-                  href="#login"
-                  onClick={() => {
-                    setOpen(false);
-                    onLogin?.();
-                  }}
-                  className="block px-3 py-2 text-gray-700"
-                >
+                <NavLink href="/login" onClick={() => { setOpen(false); onLogin?.(); }}>
                   Log in
-                </a>
-                <Button href={cta.href} className="w-full mt-2">
-                  {cta.label}
-                </Button>
+                </NavLink>
+                <SmartLink href={cta.href} className="block mt-2" onClick={() => setOpen(false)}>
+                  <Button className="w-full">{cta.label}</Button>
+                </SmartLink>
               </>
             )}
           </div>
