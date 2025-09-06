@@ -36,7 +36,8 @@ export default function Footer() {
               <ul className="mt-3 space-y-2 text-sm text-gray-600">
                 <li><a href="#product" className="hover:text-gray-900">Overview</a></li>
                 <li><a href="#pricing" className="hover:text-gray-900">Pricing</a></li>
-                <li><a href="#marketplace" className="hover:text-gray-900">Marketplace</a></li>
+                <li><a href="/about" className="hover:text-gray-900">About</a></li>
+                <li><a href="/contact" className="hover:text-gray-900">Contact</a></li>
                 <li><a href="#status" className="hover:text-gray-900">Status</a></li>
               </ul>
             </div>

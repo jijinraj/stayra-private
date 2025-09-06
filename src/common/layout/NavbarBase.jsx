@@ -7,12 +7,7 @@ import { Container } from "@/design-system/layout";
 export default function NavbarBase({
   className,
   logo = { label: "Stayra", href: "/" },
-  links = [
-    { label: "Product", href: "/#product" },   // note: hash on Home
-    { label: "Marketplace", href: "/marketplace" },
-    { label: "Pricing", href: "/#pricing" },   // hash on Home
-    { label: "Docs", href: "/docs" },
-  ],
+  links = [],
   isAuthed = false,
   user = null,
   onLogin,
