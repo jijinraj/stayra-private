@@ -2,7 +2,9 @@ import React from "react";
 import { NavbarBase } from "@/common/layout";
 import Hero from "@/sections/Hero";
 import Features from "@/sections/Features";
+import Pricing from "@/sections/Pricing";
 import { features as featuresContent } from "@/content/home.content";
+import { plans as pricingPlans } from "@/content/pricing.content";
 
 export default function PageBuilder() {
   return (
@@ -10,7 +12,7 @@ export default function PageBuilder() {
       <NavbarBase
         links={[
           { label: "Product", href: "#product" },
-          { label: "Marketplace", href: "#marketplace" }, // Lodger.ai alignment
+          { label: "Marketplace", href: "#marketplace" },
           { label: "Pricing", href: "#pricing" },
           { label: "Docs", href: "#docs" },
         ]}
@@ -31,6 +33,8 @@ export default function PageBuilder() {
         />
 
         <Features items={featuresContent} />
+
+        <Pricing items={pricingPlans} />
       </main>
     </>
   );
