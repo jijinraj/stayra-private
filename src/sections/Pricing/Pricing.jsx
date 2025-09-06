@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";                // ⬅️ add this
 import { Section } from "@/design-system/layout";
 import { PricingCard } from "@/design-system/card";
 
@@ -15,15 +16,17 @@ export default function Pricing({ items = [] }) {
         </p>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Ensure equal heights */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
         {items.map((plan, idx) => (
           <div
             key={idx}
-            className={
+            className={clsx(
+              "h-full", // stretch the ring wrapper
               plan.mostPopular
                 ? "ring-2 ring-indigo-500 rounded-2xl"
                 : "rounded-2xl"
-            }
+            )}
           >
             <PricingCard
               title={
@@ -39,6 +42,7 @@ export default function Pricing({ items = [] }) {
               price={plan.price}
               features={plan.features}
               cta={plan.cta}
+              className="h-full min-h-[360px]"    // ⬅️ consistent height across all cards
             />
           </div>
         ))}
