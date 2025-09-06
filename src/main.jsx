@@ -1,10 +1,15 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
+import "./index.css";
 import App from "./App";
-import "./index.css";   // changed from App.css → index.css
+
+const helmetContext = {}; // safe on client; SSR can reuse this too
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <HelmetProvider context={helmetContext}>
+      <App />
+    </HelmetProvider>
   </React.StrictMode>
 );

@@ -4,6 +4,8 @@ import { Button } from "@/design-system/button";
 
 export default function Login() {
   return (
+    <>
+      <SEO title="Login" description="Sign in to Stayra." canonical="/login" noindex />
     <Section id="login">
       <div className="max-w-md mx-auto bg-white border rounded-2xl p-6 shadow-sm">
         <h1 className="text-2xl font-semibold tracking-tight">Sign in to Stayra</h1>
@@ -14,5 +16,6 @@ export default function Login() {
         </div>
       </div>
     </Section>
+    </>
   );
 }
