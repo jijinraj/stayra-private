@@ -1,22 +1,19 @@
 import React from "react";
 import { Section } from "@/design-system/layout";
 import { Button } from "@/design-system/button";
+import Hero from "@/sections/Hero";
 
 export default function PageBuilder() {
   return (
     <>
-      <Section id="hero" className="text-center">
-        <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight">
-          Don’t just stay. <span className="text-indigo-600">Stayra.</span>
-        </h1>
-        <p className="mt-3 text-lg text-gray-600">
-          Making homes simpler for all.
-        </p>
-        <div className="mt-6 flex items-center justify-center gap-3">
-          <Button variant="primary" href="#get-started">Get started</Button>
-          <Button variant="outline" href="#learn-more">Learn more</Button>
-        </div>
-      </Section>
+      <Hero
+        eyebrow="Homes, handled better — for all."
+        title={<>Don’t just stay. <span className="text-indigo-600">Stayra.</span></>}
+        subtitle="Making homes simpler for all."
+        ctaPrimary={{ href: "#get-started", label: "Get started" }}
+        ctaSecondary={{ href: "#learn-more", label: "Learn more" }}
+        // imageSrc={heroImg} // optional: import an image and pass it
+      />
 
       <Section id="features">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
