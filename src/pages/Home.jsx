@@ -28,8 +28,8 @@ export default function Home() {
       />
       <Hero
         eyebrow="Homes, handled better — for all."
-        title={<>Don’t just stay. <span className="text-indigo-600">Stayra.</span></>}
-        subtitle="Making homes simpler for all."
+        title={<>Why Stay Stuck? <br/>Just <span className="text-indigo-600">Stayra</span>!</>}
+        subtitle="Homes made simpler, for everyone."
         ctaPrimary={{ href: "/login", label: "Get started" }}
         ctaSecondary={{ href: "/docs", label: "Learn more" }}
       />

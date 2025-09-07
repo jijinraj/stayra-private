@@ -7,7 +7,7 @@ import { NAV_LINKS } from "@/config/nav";
 export default function AppShell() {
   return (
     <>
-      <NavbarBase links={NAV_LINKS} cta={{ href: "/login", label: "Get started" }} />
+      <NavbarBase links={NAV_LINKS} cta={{ href: "/login", label: "Sign up" }} />
       <main id="main" className="pt-16">
         <Outlet />
       </main>

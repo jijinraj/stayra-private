@@ -22,6 +22,8 @@ export function Button({
     primary: "rounded-md bg-indigo-600 text-white hover:bg-indigo-700",
     outline: "rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50",
     ghost:   "rounded-md text-gray-600 hover:bg-gray-100",
+    invert:  "bg-[#e6e6e6] border-[#e6e6e6] text-[var(--color-bg-primary)] shadow-[var(--shadow-stack-low)] hover:bg-black hover:border-black hover:text-white",
+    white:   "bg-white text-black hover:bg-white/90 border-white", // <-- use this for the CTA
   };
 
   // Decide component: Link (SPA), anchor, or button

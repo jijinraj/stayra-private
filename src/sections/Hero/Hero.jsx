@@ -12,7 +12,7 @@ export default function Hero({
   imageAlt = "Hero illustration",
 }) {
   return (
-    <Section id="hero" className="py-20">
+    <Section id="hero" className="py-20 bg-black">
       <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-10">
         {/* Left: copy */}
         <div className="space-y-6">

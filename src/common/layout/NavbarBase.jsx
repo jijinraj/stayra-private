@@ -3,16 +3,17 @@ import clsx from "clsx";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/design-system/button";
 import { Container } from "@/design-system/layout";
+import logoMark from "/logo-mark.png";
 
 export default function NavbarBase({
   className,
-  logo = { label: "Stayra", href: "/" },
+  logo = { label: "Stayra.io", href: "/" },
   links = [],
   isAuthed = false,
   user = null,
   onLogin,
   onLogout,
-  cta = { label: "Get started", href: "/login" },
+  cta = { label: "Sign up", href: "/login" },
 }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -30,7 +31,7 @@ export default function NavbarBase({
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
 
-  // SmartLink: uses <Link> for routes, smooth-scroll for hashes
+  // SPA-friendly link + smooth-scroll for hashes
   function SmartLink({ href, className, children, onClick }) {
     const isHash = href?.includes("#");
     if (isHash) {
@@ -41,10 +42,8 @@ export default function NavbarBase({
           onClick={(e) => {
             e.preventDefault();
             const [path, hash] = href.split("#");
-            // If a different path, navigate there first, then scroll
             if (path && path !== "" && path !== location.pathname) {
-              navigate(path, { replace: false });
-              // Wait a tick for route paint
+              navigate(path);
               setTimeout(() => {
                 const el = document.getElementById(hash);
                 if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -52,7 +51,6 @@ export default function NavbarBase({
             } else {
               const el = document.getElementById(hash);
               if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-              // Update URL hash without reload
               window.history.replaceState({}, "", `#${hash}`);
             }
             onClick?.(e);
@@ -69,16 +67,17 @@ export default function NavbarBase({
     );
   }
 
+  // dark theme link: white text, light fill + border on hover
   const baseLink =
-    "px-3 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100/70 transition rounded-md";
-  const isActive = (href) =>
-    !href.includes("#") && href === location.pathname;
+    "px-4 py-2 text-sm text-white/85 border border-transparent rounded-md transition " +
+    "hover:text-white hover:bg-white/10 hover:border-white/40";
+  const isActive = (href) => href && !href.includes("#") && href === location.pathname;
 
   const NavLink = ({ href, children, onClick }) => (
     <SmartLink
       href={href}
       onClick={onClick}
-      className={clsx(baseLink, isActive(href) && "text-gray-900 font-medium")}
+      className={clsx(baseLink, isActive(href) && "text-white")}
     >
       {children}
     </SmartLink>
@@ -88,34 +87,47 @@ export default function NavbarBase({
     <>
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-white focus:px-3 focus:py-2 focus:rounded-md"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-white focus:text-black focus:px-3 focus:py-2 focus:rounded-md"
       >
         Skip to content
       </a>
 
-      {/* Full-width, glassy bar; tiny hairline by default, stronger shadow on scroll */}
+      {/* BLACK-BASED GLASS: translucent black + blur, hairline + stronger shadow on scroll */}
       <header
         data-scrolled={scrolled}
         className={clsx(
-          "fixed top-0 inset-x-0 z-50 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60",
-          "shadow-[0_1px_0_0_rgba(0,0,0,0.04)]",
-          "data-[scrolled=true]:shadow-sm",
+          "fixed top-0 inset-x-0 z-50",
+          "bg-black/60 backdrop-blur supports-[backdrop-filter]:bg-black/55",
+          "border-b border-white/10",             // subtle hairline
+          "data-[scrolled=true]:shadow-md",       // stronger on scroll
           className
         )}
         style={{ "--nav-h": "64px" }}
       >
-        <Container className="h-16 flex items-center justify-between">
-          {/* Brand */}
-          <Link
-            to={logo.href}
-            className="text-sm font-semibold tracking-tight text-gray-900"
-            aria-label="Stayra Home"
-          >
-            {logo.label}
-          </Link>
+        {/* 3-column layout: brand / centered nav / right actions */}
+        <Container className="h-16 grid grid-cols-3 items-center font-urbanist">
+          {/* left: brand */}
+          <div className="justify-self-start">
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
+<Link
+  to={logo.href}
+  className="flex items-center gap-2"
+  aria-label="Stayra Home"
+>
+  <img
+    src="/logo-mark.png"
+    alt="Stayra logo"
+    className="h-6 w-6 shrink-0"
+  />
+  <span className="text-2xl font-medium tracking-tight text-teal-300">
+    {logo.label}
+  </span>
+</Link>
+
+          </div>
+
+          {/* center: nav */}
+          <nav className="hidden md:flex justify-self-center items-center gap-8" aria-label="Primary">
             {links.map((l) => (
               <NavLink key={l.href} href={l.href}>
                 {l.label}
@@ -123,14 +135,16 @@ export default function NavbarBase({
             ))}
           </nav>
 
-          {/* Desktop actions */}
-          <div className="hidden md:flex items-center gap-2">
+          {/* right: actions */}
+          <div className="hidden md:flex justify-self-end items-center gap-3">
             {isAuthed ? (
               <>
-                <span className="text-sm text-gray-600">
-                  Hi{user?.name ? `, ${user.name}` : ""}
-                </span>
-                <Button onClick={onLogout} variant="outline">
+                <span className="text-sm text-white/70">Hi{user?.name ? `, ${user.name}` : ""}</span>
+                <Button
+                  onClick={onLogout}
+                  variant="outline"
+                  className="border-white/25 text-white hover:bg-white/10"
+                >
                   Logout
                 </Button>
               </>
@@ -139,17 +153,17 @@ export default function NavbarBase({
                 <NavLink href="/login" onClick={onLogin}>
                   Log in
                 </NavLink>
-                {/* Wrap Button with SmartLink so we keep SPA navigation */}
- <Button to={cta.href} className="rounded-md">
-   {cta.label}
- </Button>
+                {/* white pill with black text */}
+                <Button to={cta.href} variant="white" size="sm" className="px-5 rounded-lg">
+                  {cta.label}
+                </Button>
               </>
             )}
           </div>
 
-          {/* Mobile trigger */}
+          {/* mobile trigger */}
           <button
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md border border-gray-200 text-gray-700 bg-white/80"
+            className="md:hidden justify-self-end inline-flex items-center justify-center p-2 rounded-md border border-white/25 text-white bg-black/60"
             onClick={() => setOpen(true)}
             aria-label="Open menu"
           >
@@ -160,30 +174,42 @@ export default function NavbarBase({
         </Container>
       </header>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer — dark to match header */}
       <div className={clsx("md:hidden fixed inset-0 z-50", open ? "" : "pointer-events-none")}>
         <div
           className={clsx(
-            "absolute inset-0 bg-black/30 backdrop-blur-sm transition-opacity",
+            "absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity",
             open ? "opacity-100" : "opacity-0"
           )}
           onClick={() => setOpen(false)}
         />
         <div
           className={clsx(
-            "absolute top-0 right-0 h-full w-80 bg-white shadow-xl ring-1 ring-black/5 transition-transform",
+            "absolute top-0 right-0 h-full w-80 bg-black text-white shadow-xl ring-1 ring-white/10 transition-transform",
             open ? "translate-x-0" : "translate-x-full"
           )}
           role="dialog"
           aria-modal="true"
           aria-label="Mobile menu"
         >
-          <div className="flex items-center justify-between h-16 px-4 border-b border-gray-100">
-            <Link to={logo.href} className="font-semibold" onClick={() => setOpen(false)}>
-              {logo.label}
-            </Link>
+          <div className="flex items-center justify-between h-16 px-4 border-b border-white/10">
+<Link
+  to={logo.href}
+  className="flex items-center gap-2"
+  onClick={() => setOpen(false)}
+>
+  <img
+    src="/logo-mark.png"
+    alt="Stayra logo"
+    className="h-4 w-4 shrink-0"
+  />
+  <span className="font-medium text-white">
+    {logo.label}
+  </span>
+</Link>
+
             <button
-              className="p-2 rounded-md border border-gray-200 bg-white"
+              className="p-2 rounded-md border border-white/25 bg-black text-white"
               onClick={() => setOpen(false)}
               aria-label="Close menu"
             >
@@ -203,28 +229,13 @@ export default function NavbarBase({
               </NavLink>
             ))}
           </nav>
-          <div className="p-4 mt-auto">
-            {isAuthed ? (
-              <Button
-                onClick={() => {
-                  setOpen(false);
-                  onLogout?.();
-                }}
-                variant="outline"
-                className="w-full"
-              >
-                Logout
-              </Button>
-            ) : (
-              <>
-                <NavLink href="/login" onClick={() => { setOpen(false); onLogin?.(); }}>
-                  Log in
-                </NavLink>
- <Button to={cta.href} className="rounded-md">
-   {cta.label}
- </Button>
-              </>
-            )}
+          <div className="p-4 mt-auto grid gap-2">
+            <NavLink href="/login" onClick={() => { setOpen(false); onLogin?.(); }}>
+              Log in
+            </NavLink>
+            <Button to={cta.href} variant="white" size="sm" className="w-full" onClick={() => setOpen(false)}>
+              {cta.label}
+            </Button>
           </div>
         </div>
       </div>
