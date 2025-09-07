@@ -17,6 +17,21 @@ export default function Hero() {
 
   return (
     <Section id="hero" className="relative overflow-hidden pt-28 pb-12">
+{/* top aura glow */}
+<div
+  className="pointer-events-none absolute inset-x-0 -top-24 h-[280px]
+             [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]
+             [mask-image:linear-gradient(to_bottom,black,transparent)]"
+>
+  <div className="mx-auto max-w-5xl relative">
+    <div
+      className="absolute left-1/2 -translate-x-1/2 w-[1200px] h-[280px] rounded-[999px]
+                 bg-[radial-gradient(55%_100%_at_50%_0%,rgba(45,212,191,0.45),rgba(45,212,191,0.1)_45%,transparent_70%)]
+                 blur-3xl opacity-70"
+    />
+  </div>
+</div>
+
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1000px_600px_at_50%_-10%,rgba(255,255,255,0.06),transparent_80%)]" />
 
       <Container className="relative mx-auto max-w-5xl">
