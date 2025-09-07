@@ -15,23 +15,27 @@ export default function Hero() {
         transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
       };
 
+  // 3D hover tilt for the screenshot (disabled if prefers-reduced-motion)
+  const frameHover = reduce ? {} : { whileHover: { rotateX: 6, rotateY: -8 } };
+
   return (
     <Section id="hero" className="relative overflow-hidden pt-28 pb-12">
-{/* top aura glow */}
-<div
-  className="pointer-events-none absolute inset-x-0 -top-24 h-[280px]
-             [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]
-             [mask-image:linear-gradient(to_bottom,black,transparent)]"
->
-  <div className="mx-auto max-w-5xl relative">
-<div
-  className="absolute left-1/2 -translate-x-1/2 w-[1200px] h-[280px] rounded-[999px]
-             bg-[radial-gradient(55%_100%_at_50%_0%,rgba(156,163,175,0.45),rgba(156,163,175,0.12)_45%,transparent_70%)]
-             blur-3xl opacity-70"
-/>
-  </div>
-</div>
+      {/* top aura glow (neutral gray) */}
+      <div
+        className="pointer-events-none absolute inset-x-0 -top-24 h-[280px]
+                   [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]
+                   [mask-image:linear-gradient(to_bottom,black,transparent)]"
+      >
+        <div className="mx-auto max-w-5xl relative">
+          <div
+            className="absolute left-1/2 -translate-x-1/2 w-[1200px] h-[280px] rounded-[999px]
+                       bg-[radial-gradient(55%_100%_at_50%_0%,rgba(156,163,175,0.45),rgba(156,163,175,0.12)_45%,transparent_70%)]
+                       blur-3xl opacity-70"
+          />
+        </div>
+      </div>
 
+      {/* subtle background glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(1000px_600px_at_50%_-10%,rgba(255,255,255,0.06),transparent_80%)]" />
 
       <Container className="relative mx-auto max-w-5xl">
@@ -94,19 +98,30 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Screenshot block (unchanged) */}
+        {/* Screenshot block with thin inner border + 3D tilt on hover */}
         <div className="mt-14 md:mt-20">
           <div className="relative mx-auto max-w-6xl">
             <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-b from-white/10 to-transparent opacity-60 blur-2xl" />
-            <div className="relative overflow-hidden rounded-[1.5rem] bg-zinc-900/60 ring-1 ring-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.6)]">
+            <motion.div
+              {...frameHover}
+              transition={{ type: "spring", stiffness: 140, damping: 16, mass: 0.6 }}
+              style={{ transformPerspective: 1200 }}
+              className="
+                relative overflow-hidden rounded-[1.5rem] bg-zinc-900/60
+                shadow-[0_20px_80px_rgba(0,0,0,0.6)]
+                [transform-style:preserve-3d] will-change-transform
+                before:content-[''] before:absolute before:inset-0 before:rounded-[1.5rem]
+                before:border before:border-gray-400/40 before:pointer-events-none
+              "
+            >
               <img
                 src="/hero-shot.png"
                 alt="Stayra interface preview"
-                className="block w-full h-auto"
+                className="block w-full h-auto [backface-visibility:hidden]"
                 loading="eager"
                 fetchpriority="high"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </Container>
