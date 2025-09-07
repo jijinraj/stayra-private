@@ -25,3 +25,23 @@
   line-height: 1;
   color: rgba(255,255,255,0.85);
 }
+
+/* ===== Hero text blur+rise intro ===== */
+@keyframes riseBlurIn {
+  0%   { opacity: 0; filter: blur(18px); transform: translateY(24px) scale(0.99); }
+  60%  { opacity: .96; }
+  100% { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
+}
+.animate-riseBlurIn {
+  animation: riseBlurIn 1s cubic-bezier(.22,1,.36,1) both;
+  will-change: opacity, transform, filter;
+}
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-riseBlurIn {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
