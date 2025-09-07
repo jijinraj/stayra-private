@@ -24,11 +24,11 @@ export default function Hero() {
              [mask-image:linear-gradient(to_bottom,black,transparent)]"
 >
   <div className="mx-auto max-w-5xl relative">
-    <div
-      className="absolute left-1/2 -translate-x-1/2 w-[1200px] h-[280px] rounded-[999px]
-                 bg-[radial-gradient(55%_100%_at_50%_0%,rgba(45,212,191,0.45),rgba(45,212,191,0.1)_45%,transparent_70%)]
-                 blur-3xl opacity-70"
-    />
+<div
+  className="absolute left-1/2 -translate-x-1/2 w-[1200px] h-[280px] rounded-[999px]
+             bg-[radial-gradient(55%_100%_at_50%_0%,rgba(156,163,175,0.45),rgba(156,163,175,0.12)_45%,transparent_70%)]
+             blur-3xl opacity-70"
+/>
   </div>
 </div>
 
