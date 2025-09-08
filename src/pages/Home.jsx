@@ -7,6 +7,7 @@ import { features as featuresContent } from "@/content/home.content";
 import { plans as pricingPlans } from "@/content/pricing.content";
 import { SITE } from "@/common/seo/constants";
 
+
 export default function Home() {
   return (
     <>
@@ -34,7 +35,7 @@ export default function Home() {
         ctaSecondary={{ href: "/docs", label: "Learn more" }}
       />
       <div id="product" />
-      <Features items={featuresContent} />
+      <Features />
       <div id="pricing" />
       <Pricing items={pricingPlans} />
     </>

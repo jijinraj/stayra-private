@@ -143,7 +143,7 @@ export default function NavbarBase({
                   <NavLink href="/login" onClick={onLogin}>
                     Log in
                   </NavLink>
-                  <Button to={cta.href} variant="white" size="sm" className="px-5 rounded-lg">
+                  <Button to={cta.href} variant="white" size="sm" className=" rounded-lg">
                     {cta.label}
                   </Button>
                 </>
@@ -174,7 +174,7 @@ export default function NavbarBase({
       </SmartLink>
 
       {/* signup = white pill, smaller text */}
-      <Button to={cta.href} variant="white" size="sm" className="px-4 py-1.5 text-xs rounded-lg">
+      <Button to={cta.href} variant="white" size="sm" className=" text-xs rounded-lg">
         {cta.label}
       </Button>
     </>
