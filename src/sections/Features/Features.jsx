@@ -161,6 +161,7 @@ function Card({
   onClick,
 }) {
   const reduce = useReducedMotion();
+
   return (
     <motion.button
       type="button"
@@ -168,30 +169,40 @@ function Card({
       onClick={onClick}
       className={`group relative block text-left overflow-hidden rounded-[1.75rem]
                  bg-zinc-900/60 border border-white/5 shadow-[0_8px_40px_rgba(0,0,0,0.35)]
-                 h-72 p-6 focus:outline-none focus:ring-2 focus:ring-teal-400/40 ${className}`}
+                 h-72 md:h-80 lg:h-88 p-6
+                 focus:outline-none focus:ring-2 focus:ring-teal-400/40 ${className}`}
       whileHover={{ y: -4, scale: 1.01 }}
       transition={{ type: "spring", stiffness: 180, damping: 18, mass: 0.6 }}
     >
-      {/* Optional Lottie illustration with subtle grid */}
+      {/* Enlarged Lottie frame (fills most of the card) */}
       {lottieSrc && (
         <div
-          className="mb-10 w-full rounded-2xl ring-1 ring-white/10 overflow-hidden
+          className="absolute inset-x-6 top-5 bottom-20
+                     rounded-2xl ring-1 ring-white/10 overflow-hidden
                      bg-[repeating-linear-gradient(to_right,rgba(255,255,255,0.020)_0_1px,transparent_1px_20px),repeating-linear-gradient(to_bottom,rgba(255,255,255,0.020)_0_1px,transparent_1px_20px)]
                      bg-[size:20px_20px] bg-center bg-[position:0.5px_0.5px]"
         >
+          {/* grey aura glow */}
+          <div className="pointer-events-none absolute inset-x-4 bottom-1 h-8">
+            <div
+              className="w-full h-full rounded-full blur-2xl opacity-60
+                         bg-[radial-gradient(80%_100%_at_50%_100%,rgba(148,163,184,0.45),rgba(148,163,184,0.08)_60%,transparent_80%)]"
+            />
+          </div>
+
           <DotLottieReact
             src={lottieSrc}
             loop
             autoplay={!reduce}
-            className="w-full h-full"
-            style={{ width: "100%", height: "100%" }}
+            className="absolute inset-0 w-full h-full"
+            style={{ objectFit: "contain" }}
           />
         </div>
       )}
 
       {/* Title (bottom-left) */}
       <div className="absolute left-6 bottom-6 right-16">
-        <h3 className="font-urbanist text-2xl md:text-[28px] leading-tight text-white">
+        <h3 className="font-urbanist text-2xl md:text-[28px] leading-tight text-white line-clamp-2">
           {title}
         </h3>
       </div>
