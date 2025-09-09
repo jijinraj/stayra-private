@@ -49,3 +49,8 @@
 @keyframes spin-slower { to { transform: rotate(1turn); } }
 .animate-spin-slower { animation: spin-slower 16s linear infinite; }
 @media (prefers-reduced-motion: reduce) { .animate-spin-slower { animation: none !important; } }
+
+
+/* Hide horizontal scrollbar for the card scroller */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }

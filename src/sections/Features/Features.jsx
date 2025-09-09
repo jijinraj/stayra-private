@@ -91,12 +91,38 @@ export default function Features() {
             </motion.p>
           </motion.div>
 
-          {/* Cards (start AFTER header completes) */}
+          {/* Cards — mobile: horizontal scroller; desktop: grid */}
+          {/* MOBILE (≤ md): horizontal scroll with snap */}
+          <div className="md:hidden mt-10 relative -mx-4">
+            {/* edge fades to hint scroll */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black to-transparent" />
+
+            <motion.div
+              variants={cardsStagger}
+              initial="hidden"
+              animate={cardsCtrl}
+              className="flex gap-4 overflow-x-auto scroll-smooth px-4 pb-3
+                         snap-x snap-mandatory scrollbar-none"
+            >
+              {FEATURES.map((f) => (
+                <Card
+                  key={f.id}
+                  title={f.title}
+                  href={f.href}
+                  riseBlur={riseBlur}
+                  className="snap-center shrink-0 w-[85%] max-w-[22rem] min-w-[18rem]"
+                />
+              ))}
+            </motion.div>
+          </div>
+
+          {/* DESKTOP (md+): original grid */}
           <motion.div
             variants={cardsStagger}
             initial="hidden"
             animate={cardsCtrl}
-            className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            className="hidden md:grid mt-14 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {FEATURES.map((f) => (
               <Card key={f.id} title={f.title} href={f.href} riseBlur={riseBlur} />
@@ -108,14 +134,14 @@ export default function Features() {
   );
 }
 
-function Card({ title, href = "#", riseBlur }) {
+function Card({ title, href = "#", riseBlur, className = "" }) {
   return (
     <motion.a
       variants={riseBlur}
       href={href}
-      className="group relative block overflow-hidden rounded-[1.75rem]
+      className={`group relative block overflow-hidden rounded-[1.75rem]
                  bg-zinc-900/60 border border-white/5 shadow-[0_8px_40px_rgba(0,0,0,0.35)]
-                 h-72 p-6 focus:outline-none focus:ring-2 focus:ring-teal-400/40"
+                 h-72 p-6 focus:outline-none focus:ring-2 focus:ring-teal-400/40 ${className}`}
       whileHover={{ y: -4, scale: 1.01 }}
       transition={{ type: "spring", stiffness: 180, damping: 18, mass: 0.6 }}
     >
