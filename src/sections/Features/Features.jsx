@@ -15,10 +15,58 @@ const FEATURES = [
     title: "Designed To Flow",
     href: "#",
     id: "purpose",
-    lottie:
-      "https://lottie.host/d6ef5640-8ea3-4a2e-95b5-1e701d3162a5/7R5hI2a7EV.lottie",
-    blurb:
-      "Purpose-built to keep your workflow smooth—plan, communicate, and ship without friction.",
+    lottie: "https://lottie.host/d6ef5640-8ea3-4a2e-95b5-1e701d3162a5/7R5hI2a7EV.lottie",
+    blurb: [
+      {
+        subheading: "What it means",
+        body:
+          "“Designed To Flow” is our promise to remove friction from renting and property management. Stayra reduces repetitive admin so people can focus on living, managing, and helping clients."
+      },
+      { 
+        subheading: "Why it matters",
+        body: [
+          "Renting is full of scattered communication, receipts, and follow-ups. That’s wasted human energy.",
+          "Stayra automates reminders, receipts, documentation, and updates so work happens naturally."
+        ]
+      },
+      { 
+        subheading: "Why it matters",
+        body: [
+          "Renting is full of scattered communication, receipts, and follow-ups. That’s wasted human energy.",
+          "Stayra automates reminders, receipts, documentation, and updates so work happens naturally."
+        ]
+      },
+      { 
+        subheading: "Why it matters",
+        body: [
+          "Renting is full of scattered communication, receipts, and follow-ups. That’s wasted human energy.",
+          "Stayra automates reminders, receipts, documentation, and updates so work happens naturally."
+        ]
+      },
+      { 
+        subheading: "Why it matters",
+        body: [
+          "Renting is full of scattered communication, receipts, and follow-ups. That’s wasted human energy.",
+          "Stayra automates reminders, receipts, documentation, and updates so work happens naturally."
+        ]
+      },
+
+      {
+        subheading: "Why it matters",
+        body: [
+          "Renting is full of scattered communication, receipts, and follow-ups. That’s wasted human energy.",
+          "Stayra automates reminders, receipts, documentation, and updates so work happens naturally."
+        ]
+      },
+      {
+        subheading: "How it shows up in Stayra",
+        body: [
+          "Unified messaging and payments.",
+          "Automated rent reminders and receipts.",
+          "Smart document handling and status updates."
+        ]
+      }
+    ]
   },
   {
     title: "Everything In Sight",

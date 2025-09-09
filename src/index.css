@@ -51,6 +51,22 @@
 @media (prefers-reduced-motion: reduce) { .animate-spin-slower { animation: none !important; } }
 
 
+
 /* Hide horizontal scrollbar for the card scroller */
 .scrollbar-none::-webkit-scrollbar { display: none; }
 .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Subtle, thin scrollbar for modal body only */
+.modal-scroll {
+  scrollbar-width: thin;              /* Firefox */
+}
+.modal-scroll::-webkit-scrollbar {    /* Chrome/Edge */
+  width: 8px;
+}
+.modal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+.modal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
