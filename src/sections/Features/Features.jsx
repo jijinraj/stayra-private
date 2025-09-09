@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Section, Container } from "@/design-system/layout";
 import { ArrowRight } from "lucide-react";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import {
   motion,
   useReducedMotion,
@@ -9,9 +10,24 @@ import {
 } from "framer-motion";
 
 const FEATURES = [
-  { title: "Built With Purpose", href: "#", id: "purpose" },
-  { title: "Something Cool", href: "#", id: "cool" },
-  { title: "Again smthn Cool", href: "#", id: "again-cool" },
+  {
+    title: "Designed To Flow",
+    href: "#",
+    id: "purpose",
+    lottie: "https://lottie.host/d6ef5640-8ea3-4a2e-95b5-1e701d3162a5/7R5hI2a7EV.lottie",
+  },
+  {
+    title: "Everything In Sight",
+    href: "#",
+    id: "sight",
+    lottie: "https://lottie.host/1e1e285d-c21d-4d51-9284-16f9e0e1e574/35HiCH5nBj.lottie",
+  },
+  { 
+    title: "Beyond The Walls",
+    href: "#",
+    id: "wall",
+    lottie: "https://lottie.host/f6b703ac-216e-4cfc-850c-5137438cc0e6/iniEJDTlQ5.lottie",
+  },
 ];
 
 export default function Features() {
@@ -83,11 +99,7 @@ export default function Features() {
               variants={riseBlur}
               className="max-w-prose text-white/80 leading-relaxed"
             >
-              A simple property management system made by humans, for humans.
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-              sagittis massa non dapibus aliquet. Curabitur imperdiet dignissim
-              lorem ut venenatis. Integer posuere, sapien vitae dictum varius,
-              arcu nunc viverra velit.
+At Stayra, we believe finding and managing a home should never be complicated or stressful. We are creating a property management system that puts people first, while reducing manual work through smart automation. By making renting simpler for tenants, landlords, and agencies alike, our mission is to make housing fair, transparent, and effortless by uniting payments, communication, and property management in one place.
             </motion.p>
           </motion.div>
 
@@ -111,6 +123,7 @@ export default function Features() {
                   title={f.title}
                   href={f.href}
                   riseBlur={riseBlur}
+                  lottieSrc={f.lottie}
                   className="snap-center shrink-0 w-[85%] max-w-[22rem] min-w-[18rem]"
                 />
               ))}
@@ -124,9 +137,15 @@ export default function Features() {
             animate={cardsCtrl}
             className="hidden md:grid mt-14 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
-            {FEATURES.map((f) => (
-              <Card key={f.id} title={f.title} href={f.href} riseBlur={riseBlur} />
-            ))}
+ {FEATURES.map((f) => (
+   <Card
+     key={f.id}
+     title={f.title}
+     href={f.href}
+     riseBlur={riseBlur}
+     lottieSrc={f.lottie}
+   />
+ ))}
           </motion.div>
         </div>
       </Container>
@@ -134,7 +153,8 @@ export default function Features() {
   );
 }
 
-function Card({ title, href = "#", riseBlur, className = "" }) {
+function Card({ title, href = "#", riseBlur, className = "", lottieSrc }) {
+  const reduce = useReducedMotion();
   return (
     <motion.a
       variants={riseBlur}
@@ -145,6 +165,27 @@ function Card({ title, href = "#", riseBlur, className = "" }) {
       whileHover={{ y: -4, scale: 1.01 }}
       transition={{ type: "spring", stiffness: 180, damping: 18, mass: 0.6 }}
     >
+
+
+      {/* Optional Lottie illustration */}
+      {lottieSrc && (
+<div
+  className="mb-10 w-full rounded-2xl ring-1 ring-white/10 overflow-hidden
+             bg-[repeating-linear-gradient(to_right,rgba(255,255,255,0.020)_0_1px,transparent_1px_20px),repeating-linear-gradient(to_bottom,rgba(255,255,255,0.020)_0_1px,transparent_1px_20px)]
+             bg-[size:20px_20px]
+             bg-center
+             bg-[position:0.5px_0.5px]"
+>
+          <DotLottieReact
+            src={lottieSrc}
+            loop
+            autoplay={!reduce}
+            className="w-full h-full"
+            style={{ width: "100%", height: "100%" }}
+          />
+        </div>
+      )}
+
       {/* Title (bottom-left) */}
       <div className="absolute left-6 bottom-6 right-16">
         <h3 className="font-urbanist text-2xl md:text-[28px] leading-tight text-white">
