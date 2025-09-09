@@ -1,4 +1,3 @@
-// src/sections/Features/FeatureModal.jsx
 import React, { useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { X } from "lucide-react";
@@ -89,9 +88,7 @@ export default function FeatureModal({ open, onClose, feature }) {
             onClick={onClose}
           />
 
-          {/* Dialog wrapper:
-              - Mobile: centered
-              - Desktop: bottom-centered, no bottom padding so it touches the bottom */}
+          {/* Dialog wrapper: mobile centered; desktop bottom-docked */}
           <motion.div
             key="dialog"
             role="dialog"
@@ -107,7 +104,7 @@ export default function FeatureModal({ open, onClose, feature }) {
               className="
                 relative w-full
                 max-w-md sm:max-w-lg md:max-w-3xl lg:max-w-4xl
-                max-h-[92vh] md:max-h-[92vh]
+                max-h-[92vh]
                 flex flex-col overflow-hidden
                 rounded-2xl md:rounded-t-2xl md:rounded-b-none
                 bg-zinc-950 ring-1 ring-white/10 shadow-2xl
@@ -121,7 +118,10 @@ export default function FeatureModal({ open, onClose, feature }) {
                   bg-[size:24px_24px]
                 "
               >
+                {/* soft scene vignette */}
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_80%_at_50%_0%,rgba(255,255,255,0.06),transparent_70%)]" />
+
+                {/* Lottie */}
                 {feature?.lottie && (
                   <DotLottieReact
                     src={feature.lottie}
@@ -131,6 +131,18 @@ export default function FeatureModal({ open, onClose, feature }) {
                     style={{ objectFit: "contain" }}
                   />
                 )}
+
+                {/* 🔸 Grey aura glow under the Lottie frame */}
+                <div className="pointer-events-none absolute inset-x-6 bottom-2 h-10 sm:h-12 md:h-14">
+                  <div
+                    className="
+                      w-full h-full rounded-full blur-2xl opacity-60
+                      bg-[radial-gradient(80%_100%_at_50%_100%,rgba(148,163,184,0.45),rgba(148,163,184,0.08)_60%,transparent_80%)]
+                    "
+                  />
+                </div>
+
+                {/* Close */}
                 <button
                   onClick={onClose}
                   aria-label="Close"
