@@ -170,7 +170,7 @@ function Card({
       className={`group relative block text-left overflow-hidden rounded-[1.75rem]
                  bg-zinc-900/60 border border-white/5 shadow-[0_8px_40px_rgba(0,0,0,0.35)]
                  h-72 md:h-80 lg:h-88 p-6
-                 focus:outline-none focus:ring-2 focus:ring-teal-400/40 ${className}`}
+                 focus:outline-none  ${className}`}
       whileHover={{ y: -4, scale: 1.01 }}
       transition={{ type: "spring", stiffness: 180, damping: 18, mass: 0.6 }}
     >

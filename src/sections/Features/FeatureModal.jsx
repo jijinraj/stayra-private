@@ -115,7 +115,7 @@ export default function FeatureModal({ open, onClose, feature }) {
                 className="
                   relative h-40 sm:h-52 md:h-56 isolate shrink-0
                   [background-image:linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.06)_1px,transparent_1px)]
-                  bg-[size:24px_24px]
+                  bg-[size:24px_24px] border-b border-[rgba(255,255,255,0.25)]
                 "
               >
                 {/* soft scene vignette */}
