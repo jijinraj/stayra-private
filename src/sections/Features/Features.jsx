@@ -1,3 +1,4 @@
+// src/sections/Features/Features.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { Section, Container } from "@/design-system/layout";
 import { ArrowRight } from "lucide-react";
@@ -11,11 +12,9 @@ import {
 import FeatureModal from "./FeatureModal";
 import { FEATURES } from "./features.data";
 
-
 export default function Features() {
   const reduce = useReducedMotion();
 
-  // element animation
   const riseBlur = reduce
     ? { hidden: {}, show: {} }
     : {
@@ -28,7 +27,6 @@ export default function Features() {
         },
       };
 
-  // staggers
   const headerStagger = reduce
     ? {}
     : { show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } } };
@@ -36,7 +34,6 @@ export default function Features() {
     ? {}
     : { show: { transition: { staggerChildren: 0.12 } } };
 
-  // chain header → cards
   const rootRef = useRef(null);
   const inView = useInView(rootRef, { once: true, amount: 0.3 });
   const headerCtrl = useAnimation();
@@ -51,7 +48,6 @@ export default function Features() {
     })();
   }, [inView, headerCtrl, cardsCtrl]);
 
-  // modal state
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(null);
   const openModal = (f) => {
@@ -61,8 +57,13 @@ export default function Features() {
   const closeModal = () => setOpen(false);
 
   return (
-    <Section id="features" className="pt-24 pb-16">
-      <Container className="mx-auto max-w-5xl">
+    <Section
+      id="features"
+      // ⬇️ Full-screen + vertical center (mobile toolbar safe)
+      className="min-h-screen min-h-[100svh] py-12 md:py-16 flex items-center"
+    >
+      {/* ⬇️ Optional w-full, no height change */}
+      <Container className="mx-auto max-w-5xl w-full">
         <div ref={rootRef}>
           {/* Header (plays first) */}
           <motion.div
@@ -100,7 +101,6 @@ export default function Features() {
           {/* Cards — mobile: horizontal scroller; desktop: grid */}
           {/* MOBILE (≤ md): horizontal scroll with snap */}
           <div className="md:hidden mt-10 relative -mx-4">
-            {/* edge fades to hint scroll */}
             <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black to-transparent" />
 
@@ -146,7 +146,6 @@ export default function Features() {
         </div>
       </Container>
 
-      {/* Modal */}
       <FeatureModal open={open} onClose={closeModal} feature={active} />
     </Section>
   );
@@ -174,7 +173,6 @@ function Card({
       whileHover={{ y: -4, scale: 1.01 }}
       transition={{ type: "spring", stiffness: 180, damping: 18, mass: 0.6 }}
     >
-      {/* Enlarged Lottie frame (fills most of the card) */}
       {lottieSrc && (
         <div
           className="absolute inset-x-6 top-5 bottom-20
@@ -182,7 +180,6 @@ function Card({
                      bg-[repeating-linear-gradient(to_right,rgba(255,255,255,0.020)_0_1px,transparent_1px_20px),repeating-linear-gradient(to_bottom,rgba(255,255,255,0.020)_0_1px,transparent_1px_20px)]
                      bg-[size:20px_20px] bg-center bg-[position:0.5px_0.5px]"
         >
-          {/* grey aura glow */}
           <div className="pointer-events-none absolute inset-x-4 bottom-1 h-8">
             <div
               className="w-full h-full rounded-full blur-2xl opacity-60
@@ -200,14 +197,12 @@ function Card({
         </div>
       )}
 
-      {/* Title (bottom-left) */}
       <div className="absolute left-6 bottom-6 right-16">
         <h3 className="font-urbanist text-2xl md:text-[28px] leading-tight text-white line-clamp-2">
           {title}
         </h3>
       </div>
 
-      {/* Round arrow (bottom-right) */}
       <span
         className="absolute right-6 bottom-6 inline-flex size-9 items-center justify-center rounded-full
                    bg-white/10 text-white/90 transition
