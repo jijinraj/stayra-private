@@ -50,7 +50,7 @@ export default function Home() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "How is Stayra different from traditional property management?",
+        name: "How is Stayra different from traditional management?",
         acceptedAnswer: {
           "@type": "Answer",
           text:
@@ -59,7 +59,7 @@ export default function Home() {
       },
       {
         "@type": "Question",
-        name: "Can I set up automatic rent payments, and when do landlords receive payouts?",
+        name: "Can tenants set up auto-rent, and when are payouts made?",
         acceptedAnswer: {
           "@type": "Answer",
           text:
@@ -68,7 +68,7 @@ export default function Home() {
       },
       {
         "@type": "Question",
-        name: "How do tenants report repairs or maintenance issues through Stayra?",
+        name: "How do tenants report repairs or issues?",
         acceptedAnswer: {
           "@type": "Answer",
           text:
@@ -77,7 +77,7 @@ export default function Home() {
       },
       {
         "@type": "Question",
-        name: "How does Stayra simplify property management for landlords and agencies?",
+        name: "How does Stayra simplify work for landlords and agencies?",
         acceptedAnswer: {
           "@type": "Answer",
           text:
@@ -86,7 +86,7 @@ export default function Home() {
       },
       {
         "@type": "Question",
-        name: "Can agencies manage multiple landlords and properties under one account?",
+        name: "Can agencies manage multiple landlords/properties?",
         acceptedAnswer: {
           "@type": "Answer",
           text:
@@ -95,7 +95,7 @@ export default function Home() {
       },
       {
         "@type": "Question",
-        name: "Does Stayra provide reporting and analytics?",
+        name: "Does Stayra offer reporting and analytics?",
         acceptedAnswer: {
           "@type": "Answer",
           text:
@@ -104,7 +104,7 @@ export default function Home() {
       },
       {
         "@type": "Question",
-        name: "Can I store tenancy agreements and contracts in Stayra, and does it support e-signatures?",
+        name: "Can I store contracts, and are e-signatures supported?",
         acceptedAnswer: {
           "@type": "Answer",
           text:
@@ -113,7 +113,7 @@ export default function Home() {
       },
       {
         "@type": "Question",
-        name: "Is Stayra compliant with UK/EU rental laws, including GDPR and Right to Rent checks?",
+        name: "Is Stayra compliant with GDPR and Right to Rent laws?",
         acceptedAnswer: {
           "@type": "Answer",
           text:

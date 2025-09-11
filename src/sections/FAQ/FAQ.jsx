@@ -3,21 +3,21 @@ import { Section, Container } from "@/design-system/layout";
 import { ChevronDown, Link as LinkIcon } from "lucide-react";
 
 const FAQ_ITEMS = [
-  { q: "How is Stayra different from traditional property management?",
+  { q: "How is Stayra different from traditional management?",
     a: "Stayra removes the clutter of emails, paper receipts, and missed reminders. Instead, everything—rent payments, messaging, contracts, and updates—lives in one simple platform. It’s designed to save time for landlords, agencies, and tenants while reducing admin and human error." },
-  { q: "Can I set up automatic rent payments, and when do landlords receive payouts?",
+  { q: "Can tenants set up auto-rent, and when are payouts made?",
     a: "Yes. Tenants can enable secure automatic rent payments by card or bank. Landlords typically receive payouts within 1–2 business days, directly to their connected bank account." },
-  { q: "How do tenants report repairs or maintenance issues through Stayra?",
+  { q: "How do tenants report repairs or issues?",
     a: "Tenants can log issues directly in Stayra, attach notes or photos, and the landlord or agency is instantly notified. This keeps all communication tracked in one place and ensures faster resolution." },
-  { q: "How does Stayra simplify property management for landlords and agencies?",
+  { q: "How does Stayra simplify work for landlords and agencies?",
     a: "Stayra automates routine tasks like rent reminders, receipts, and document storage. It reduces back-and-forth by centralising communication, while agencies can manage multiple landlords and properties with fewer admin hours." },
-  { q: "Can agencies manage multiple landlords and properties under one account?",
+  { q: "Can agencies manage multiple landlords/properties?",
     a: "Yes. Agencies can oversee multiple landlords, properties, and tenants from a single dashboard. Permissions and roles can be assigned to team members for efficient collaboration." },
-  { q: "Does Stayra provide reporting and analytics?",
+  { q: "Does Stayra offer reporting and analytics?",
     a: "Absolutely. Landlords and agencies get clear insights on rent collection, outstanding payments, occupancy, and property performance—all exportable for accounting or compliance needs." },
-  { q: "Can I store tenancy agreements and contracts in Stayra, and does it support e-signatures?",
+  { q: "Can I store contracts, and are e-signatures supported?",
     a: "Yes. You can upload, store, and manage tenancy agreements securely. Stayra also supports e-signatures, so contracts can be signed and shared digitally without printing or scanning." },
-  { q: "Is Stayra compliant with UK/EU rental laws, including GDPR and Right to Rent checks?",
+  { q: "Is Stayra compliant with GDPR and Right to Rent laws?",
     a: "Yes. Stayra is built with compliance in mind. We follow GDPR standards to protect personal data and support processes like UK “Right to Rent” checks—helping you stay compliant without extra paperwork." }
 ];
 

@@ -174,7 +174,7 @@ export default function NavbarBase({
       </SmartLink>
 
       {/* signup = white pill, smaller text */}
-      <Button to={cta.href} variant="white" size="sm" className=" text-xs rounded-lg">
+      <Button to={cta.href} variant="white" size="sm" className="p-4 text-xs rounded-lg">
         {cta.label}
       </Button>
     </>
